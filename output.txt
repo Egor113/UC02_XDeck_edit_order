@@ -1,10 +1,12 @@
-Virtual User Script started at: 26.11.2019 15:22:42
+Virtual User Script started at: 26.11.2019 18:15:14
 Starting action vuser_init.
+JDBC Connection Successful
 Ending action vuser_init.
 Running Vuser...
 Starting iteration 1.
 Starting action Actions.
-JDBC Connection Successful
+Success
+INSERT INTO task (id, change_id, ticket_id, guid, header, text, priority_id, state_id, client_id, create_date, external_system)values ('149386','IDC2D620524153zdzPWAoX9OFgW4UB', '149386','d830c5ee-9b77-4bd1-879a-0c4d2c282a67', 'Уведомление о нарушении работы холодильного оборудования', 'Просим решить проблему в кратчайший срок', '3', '2', '106', '1511190000000', 'ASKO')
 Success
 Ending action Actions.
 Ending iteration 1.
