@@ -1,18 +1,19 @@
 Notify: search current JDK in Windows registry at(SOFTWARE\JavaSoft\Java Development Kit)
 Notify: JDK found at C:/Program Files (x86)/Java/jdk1.8.0_231
-Virtual User Script started at: 26.11.2019 18:15:14
+Virtual User Script started at: 27.11.2019 16:23:33
 Starting action vuser_init.
-JDBC Connection Successful
+Actions.java(9): Notify: Transaction "UC02_TR01_Add_task" started.
+Connection Success
 Ending action vuser_init.
 Running Vuser...
 Starting iteration 1.
 Starting action Actions.
-Success
-INSERT INTO task (id, change_id, ticket_id, guid, header, text, priority_id, state_id, client_id, create_date, external_system)values ('149386','IDC2D620524153zdzPWAoX9OFgW4UB', '149386','d830c5ee-9b77-4bd1-879a-0c4d2c282a67', 'Уведомление о нарушении работы холодильного оборудования', 'Просим решить проблему в кратчайший срок', '3', '2', '106', '1511190000000', 'ASKO')
-Success
+Update Success
+Insert Success
 Ending action Actions.
 Ending iteration 1.
 Ending Vuser...
 Starting action vuser_end.
+Actions.java(84): Notify: Transaction "UC02_TR01_Add_task" ended with a "Pass" status (Duration: 1,6815).
 Ending action vuser_end.
 Vuser Terminated.

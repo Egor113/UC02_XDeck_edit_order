@@ -49,9 +49,11 @@ vuser_init=Java-Interpreter
 Actions=Java-Interpreter
 vuser_end=Java-Interpreter
 [TransactionsOrder]
-Order=
+Order="UC02_TR01_Add_task"
 [StateManagement]
 LastReplayStatus=1
 [ActiveReplay]
 LastReplayedRunName=
 ActiveRunName=
+[Transactions]
+UC02_TR01_Add_task=
