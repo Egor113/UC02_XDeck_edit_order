@@ -34,7 +34,7 @@ public class Actions
             connection.setAutoCommit(false);
             try {
             	lr.read_file("../file_id.txt","ID", lr.EXIT_ACTION_AND_CONTINUE);
-            	String str = "UPDATE ticket SET state_id = '2' WHERE id = '" + 
+            	String str = "UPDATE ticket SET state_id = '1' WHERE id = '" + 
             		lr.eval_string("{ID}").trim() + "'";
             	statement.execute(str);
                 connection.commit();
