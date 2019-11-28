@@ -37,12 +37,10 @@ public class Actions
 	public void updateIDs() throws Throwable{
 		connection.setAutoCommit(false);
         try {
-			for(String id: IDset) {
-	            String str = "UPDATE ticket SET state_id = '1' WHERE id = '" + 
-	            id + "'";
-	            statement.execute(str);
-			}
-            connection.commit();
+			String str = "UPDATE ticket SET state_id = '1'" +
+			"WHERE id in (select id from ticket where state_id =  '-1')";
+	        statement.execute(str);
+			connection.commit();
             lr.log_message("Update Success");
             } catch (SQLException e) {
             	e.printStackTrace();
