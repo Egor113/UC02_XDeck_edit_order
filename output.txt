@@ -1,17 +1,17 @@
-Virtual User Script started at: 28.11.2019 11:01:57
+Virtual User Script started at: 28.11.2019 16:07:02
 Starting action vuser_init.
-Actions.java(13): Notify: Transaction "UC02_TR01_Add_task" started.
-Connection Success
 Ending action vuser_init.
 Running Vuser...
 Starting iteration 1.
 Starting action Actions.
-Insert Success
+Actions.java(16): Notify: Transaction "UC02_TR01_Add_task" started.
+Connection Success
 Update Success
+Insert Success
+Actions.java(51): Notify: Transaction "UC02_TR01_Add_task" ended with a "Pass" status (Duration: 1,8316).
 Ending action Actions.
 Ending iteration 1.
 Ending Vuser...
 Starting action vuser_end.
-Actions.java(92): Notify: Transaction "UC02_TR01_Add_task" ended with a "Pass" status (Duration: 1,7565).
 Ending action vuser_end.
 Vuser Terminated.

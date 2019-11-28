@@ -5,36 +5,54 @@ import java.util.Set;
 
 public class Actions
 {
-	Connection connection = null;
-	Statement statement = null;
 	Set<String> IDset = null;
 
-	public int init() throws Throwable {
-		lr.start_transaction("UC02_TR01_Add_task");
-		try {
-            Class.forName("oracle.jdbc.OracleDriver");
-	    	String url = "jdbc:oracle:thin:@192.168.14.53:1522:orcl";
-	    	connection = DriverManager.getConnection(url,"c##x5","c##x5");
-	    	statement = connection.createStatement();
-	    	lr.log_message("Connection Success");
-        }
-        catch (ClassNotFoundException e) {
-            e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-	    	lr.abort();
-	  	}
+	public int init(){
 		return 0;
 	}
 
 	public int action() throws Throwable {
-		getTasks();
-		addTasks();
-		updateIDs();
+		
+		lr.start_transaction("UC02_TR01_Add_task");
+		
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+		} catch (ClassNotFoundException e) {
+            e.printStackTrace();
+		}
+				
+		try (Connection connection = DriverManager.
+		    getConnection("jdbc:oracle:thin:@192.168.14.53:1522:orcl","c##x5","c##x5");
+		    Statement statement = connection.createStatement())	{
+			
+		    	lr.log_message("Connection Success");
+		    	IDset = new HashSet<>();
+		    	
+		    	String sqlRead = "select * from ticket where state_id =  '-1'";
+		    			    	
+		    	try (ResultSet rs = statement.executeQuery(sqlRead)){
+		    			while (rs.next()) {
+	             		IDset.add(rs.getString("id"));
+		    		}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				
+		    	updateIDs(connection, statement);
+		    	addTasks(connection, statement);
+
+				
+	    }
+         catch (SQLException e) {
+			e.printStackTrace();
+	    	lr.abort();
+		}
+		
+		lr.end_transaction("UC02_TR01_Add_task",lr.PASS);
 		return 0;
 	}
 	
-	public void updateIDs() throws Throwable{
+	public void updateIDs(Connection connection, Statement statement) throws Throwable{
 		connection.setAutoCommit(false);
         try {
 			String str = "UPDATE ticket SET state_id = '1'" +
@@ -49,7 +67,7 @@ public class Actions
         connection.setAutoCommit(true);
 	}
 	
-	public void addTasks() throws Throwable{
+	public void addTasks(Connection connection, Statement statement) throws Throwable{
 		connection.setAutoCommit(false);
 		try {
 			for(String id: IDset) {
@@ -71,25 +89,10 @@ public class Actions
 	        connection.rollback();
 	    }
         connection.setAutoCommit(true);
+        
     }
 	
-	public void getTasks() throws Throwable{
-		String sqlRead = "select * from ticket where state_id =  '-1'";
-		ResultSet rs = statement.executeQuery(sqlRead);
-		IDset = new HashSet<>();
-        while (rs.next()) {
-             IDset.add(rs.getString("id"));
-        }
-	}
-	
-	public int end() throws Throwable {
-		try {
-                connection.close();
-                statement.close();
-            } catch (SQLException e2) {
-                e2.printStackTrace();
-            }
-		lr.end_transaction("UC02_TR01_Add_task",lr.PASS);
+	public int end() {
 		return 0;
 	}
 }
